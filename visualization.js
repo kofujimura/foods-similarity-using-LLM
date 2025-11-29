@@ -1,12 +1,39 @@
 class GraphVisualizer {
     constructor() {
         this.svg = d3.select('#graph');
-        this.width = +this.svg.attr('width');
-        this.height = +this.svg.attr('height');
         this.color = d3.scaleOrdinal(d3.schemeCategory20);
         this.simulation = null;
 
+        this.updateDimensions();
         this.initSimulation();
+
+        window.addEventListener('resize', () => {
+            this.updateDimensions();
+            this.updateSimulationForces();
+        });
+    }
+
+    updateDimensions() {
+        const container = document.getElementById('visualizationContainer');
+        this.width = container.clientWidth - 40;
+        this.height = Math.min(this.width * 2 / 3, 800);
+
+        this.svg
+            .attr('width', this.width)
+            .attr('height', this.height)
+            .attr('viewBox', `0 0 ${this.width} ${this.height}`)
+            .attr('preserveAspectRatio', 'xMidYMid meet');
+    }
+
+    updateSimulationForces() {
+        if (this.simulation) {
+            this.simulation
+                .force('x', d3.forceX(this.width / 2).strength(0.04))
+                .force('y', d3.forceY(this.height / 2).strength(0.04))
+                .force('center', d3.forceCenter(this.width / 2, this.height / 2))
+                .alpha(0.3)
+                .restart();
+        }
     }
 
     initSimulation() {

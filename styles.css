@@ -168,6 +168,10 @@ header p {
     background: white;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    max-width: 1200px;
+    aspect-ratio: 3 / 2;
 }
 
 .links line {
@@ -282,7 +286,6 @@ header p {
     }
 
     #graph {
-        width: 100% !important;
-        height: 600px !important;
+        aspect-ratio: 1 / 1;
     }
 }
