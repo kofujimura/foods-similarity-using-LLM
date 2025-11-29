@@ -4,7 +4,7 @@ LLMのembeddingモデルを活用して任意のデータ間の類似度を算�
 
 ## 概要
 
-OpenAIのtext-embedding-3-smallモデルを使用して、CSV/XLSXファイルのデータからベクトル表現を生成し、コサイン類似度を計算します。類似度の高いアイテムをネットワークグラフで可視化することで、データ間の関係性を直感的に理解できます。
+OpenAIのtext-embedding-3-largeモデルを使用して、CSV/XLSXファイルのデータからベクトル表現を生成し、コサイン類似度を計算します。類似度の高いアイテムをネットワークグラフで可視化することで、データ間の関係性を直感的に理解できます。
 
 ![食品類似度ネットワーク](foods-similarity.png)
 
@@ -22,6 +22,10 @@ APIキーはブラウザのLocalStorageに保存されるため、2回目以降�
 実際の動作を試せるデモサイトを公開しています：
 
 **[https://web.fujimura.com/data-visualization-using-LLM/index.html](https://web.fujimura.com/data-visualization-using-LLM/index.html)**
+
+食品データで事前生成したグラフのサンプル表示：
+
+**[sample.html](sample.html)** - 114種類の食品類似度ネットワークグラフ（JSONデータから直接可視化）
 
 サンプルデータをダウンロードして試すことができます：
 
@@ -56,10 +60,10 @@ APIキーはブラウザのLocalStorageに保存されるため、2回目以降�
 
 - **フロントエンド**: Vanilla JavaScript（フレームワーク不要）
 - **可視化ライブラリ**: D3.js v4
-- **Embeddingモデル**: OpenAI text-embedding-3-small（1536次元）
+- **Embeddingモデル**: OpenAI text-embedding-3-large（3072次元）
 - **類似度指標**: コサイン類似度
 - **クラスタリング**: K-means法（3〜15クラスタ、データ数に応じて自動調整）
-- **ネットワーク**: 各ノードの上位5類似アイテムをエッジとして接続
+- **ネットワーク**: 各ノードの上位3類似アイテムをエッジとして接続
 
 ## データフォーマット
 
